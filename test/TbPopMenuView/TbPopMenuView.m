@@ -11,7 +11,6 @@
 #define  ATdeviceScaleHight  [UIScreen mainScreen].bounds.size.height
 
 #import "TbPopMenuView.h"
-#import "UIView+Extension.h"
 @interface TbPopMenuView()<UITableViewDataSource,UITableViewDelegate>
 {
     NSInteger selectRow;
@@ -40,8 +39,10 @@
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         [window addSubview:self.bgView];
         [window addSubview:self];
-        self.centerX = ATdeviceScaleWidth * 0.5;
-        self.centerY = ATdeviceScaleHight * 0.5;
+        CGPoint center = self.center;
+        center.x = ATdeviceScaleWidth * 0.5;
+        center.y = ATdeviceScaleHight * 0.5;
+        self.center = center;
         
         [self setupTableViewCheck];
     }
@@ -74,7 +75,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setViewCornerRadius:4];
+    [self.layer setCornerRadius:4];
 }
 
 - (void)hide
